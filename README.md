@@ -1,4 +1,5 @@
-# Project Title
+# WOA - Python
+![SST January](sst_jan.png)
 
 Reads WORLD OCEAN ATLAS 2018 (WOA18) variables and creates python numpy matrix with climatologies. Also extracts climatological information from a list of coordinate points.
 
