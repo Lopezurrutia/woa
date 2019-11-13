@@ -25,9 +25,7 @@ read_and_plot(
         	max_val=35,
         	title= 'Sea surface temperature',
         	filename='sst_jan.png')
-
 ```
-
 would make the plot presented above
 extract_woa : extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
 
