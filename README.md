@@ -1,16 +1,15 @@
 # WOA - Python
-![SST January](sst_jan.png)
-
 Reads WORLD OCEAN ATLAS 2018 (WOA18) variables and creates python numpy matrix with climatologies. Also extracts climatological information from a list of coordinate points.
+![SST January](sst_jan.png)
 
 ## Getting Started
 See https://www.nodc.noaa.gov/OC5/woa18/ for information on the World Ocean Atlas variables, resolution, etc.
-Download all variables and resolutions by running the bash script:
+Download all variables and resolutions, and convert to numpy arrays by running the bash script:
 ```
 ./read_woa_all.sh
 ```
-
-The compressed numpy files are saved to the output dir (default to woa_np), one file per variable.
+Uncomment those varaibles not of your interest.  
+The compressed numpy files are saved to the output dir (default to woa_np), one file per variable.  
 WARNING: The files at 0.25 degree resolution are quite large, aprox 1.5 Gb each for the temperature and salinity npz files.
 
 utils.py contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
@@ -29,10 +28,8 @@ read_and_plot(
 
 ```
 
-	would make the plot presented above
-
-
-	 extract_woa : extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
+would make the plot presented above
+extract_woa : extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
 
 
 ## Other files not used
