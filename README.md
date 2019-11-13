@@ -12,7 +12,7 @@ Uncomment those varaibles not of your interest.
 The compressed numpy files are saved to the output dir (default to woa_np), one file per variable.  
 WARNING: The files at 0.25 degree resolution are quite large, aprox 1.5 Gb each for the temperature and salinity npz files.
 
-utils.py contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
+- utils.py contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
 	 for example:
 ```
 read_and_plot(
@@ -27,7 +27,7 @@ read_and_plot(
         	filename='sst_jan.png')
 ```
 would make the plot presented above
-extract_woa : extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
+- extract_woa : extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
 
 
 ## Other files not used
