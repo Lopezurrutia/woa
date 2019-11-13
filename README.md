@@ -14,8 +14,8 @@ WARNING: The files at 0.25 degree resolution are quite large, aprox 1.5 Gb each 
 
 utils.py contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
 	 for example:
-	 '''
-	 read_and_plot(
+```
+read_and_plot(
 		variable='temperature',
 	        resolution = '04',
         	woapath='woa_np/',
@@ -25,7 +25,9 @@ utils.py contains utility functions to make global maps of specific variables an
         	max_val=35,
         	title= 'Sea surface temperature',
         	filename='sst_jan.png')
-		'''
+
+```
+
 	would make the plot presented above
 
 
