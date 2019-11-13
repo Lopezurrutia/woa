@@ -43,6 +43,7 @@ def woa_point(lons, lats, depths,variable='temperature', time_period='annual', r
    #  '1/4': ('0.25', '04'),
         
     url = _woa_url(variable=variable, time_period=time_period, resolution=resolution)
+    print(url)
     with warnings.catch_warnings():
         warnings.simplefilter('ignore')
         cubes = iris.load_raw(url)
@@ -52,7 +53,7 @@ def woa_point(lons, lats, depths,variable='temperature', time_period='annual', r
     # mn=The statistical mean is the average of all unflagged interpolated values at each standard depth level for each variable in each 1° square which contains at least one measurement for the given oceanographic variable.
     
     v = _woa_variable(variable)
-    cube = [c for c in cubes if c.var_name == f'{v}_mn'][0]
+    cube = [c for c in cubes if c.var_name == f'{v}_an'][0]
 
     ## This version is very slow, using the same approach as woa_profile
     # scheme = iris.analysis.Nearest()
@@ -70,6 +71,7 @@ def woa_point(lons, lats, depths,variable='temperature', time_period='annual', r
         index1=cube.coord('depth').nearest_neighbour_index(depth)
         index2=cube.coord('latitude').nearest_neighbour_index(lat)
         index3=cube.coord('longitude').nearest_neighbour_index(lon)
+        print(cube.shape,index1,index2,index3)
         return cube[0,index1,index2,index3].data
 
     ##
@@ -81,8 +83,8 @@ def woa_point(lons, lats, depths,variable='temperature', time_period='annual', r
     for i, (depth,lat,lon) in enumerate(zip(depths,lats,lons)):
         print(i)
         print(depth,lat,lon)
-        print(nearval(depth,lat,lon).data)
         output[i]=nearval(depth,lat,lon)
+        print(output[i])
 
     return output
 
@@ -90,3 +92,13 @@ def woa_point(lons, lats, depths,variable='temperature', time_period='annual', r
 aa=woa_point(lons=[-10], lats=[45] ,depths=[0], time_period='00')
 ## This works with multiple data points
 aa=woa_point(lons=[-10,-12],lats=[45,47],depths=[0,0], time_period='00')
+
+aa=woa_point(lons=[10,-12,30],lats=[45,47,-44],depths=[0,10,100], time_period='01')
+
+
+
+
+lons_in=[10,-12,30]                                                               
+lats_in=[45,47,-44]                                                               
+depths_in=[0,10,100]                                                              
+months_in=[1,1,1]       

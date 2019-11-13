@@ -8,7 +8,7 @@ arg = parser.add_argument
 arg('--variable', default="temperature")
 arg('--resolution', default='04')
 arg('--field', default='an')
-arg('--outpath', default='woa_np/')
+arg('--woapath', default='woa_np/')
 args = parser.parse_args()
 
 def _woa_variable(variable):
@@ -173,7 +173,7 @@ def main():
 
     for i in months:
         print('Reading month',i)
-        time_period=str(i).zfill(2)
+        time_period=str(i+1).zfill(2) ## months start at 01
         url = _woa_url(variable=args.variable, time_period=time_period, resolution=args.resolution)
         print('url',url)
         nc_fid=netCDF4.Dataset(url, mode='r')  
@@ -193,9 +193,9 @@ def main():
 
     ## Writes the resulting matrix to 
     outfile=f'woa18_{args.variable}_{args.resolution}.npz'
-    outfile=os.path.join(args.outpath,outfile)
-    if not os.path.exists(args.outpath):
-        os.makedirs(args.outpath)
+    outfile=os.path.join(args.woapath,outfile)
+    if not os.path.exists(args.woapath):
+        os.makedirs(args.woapath)
     print('Writing result to',outfile)
     np.savez_compressed(outfile,var=woa_mat,lats=lats,lats_bnds=lats_bnds,lons=lons,lons_bnds=lons_bnds,depths=depths,depths_bnds=depths_bnds)
     print('Done')
