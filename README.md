@@ -38,7 +38,7 @@ extract_woa(
         resolution = '04',
         woapath='woa_np/')
 ```
-would return 'array([14.12209034, 12.3142004 ])'
+would return 'array([14.12209034, 12.3142004 ])'  
 this function extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
 
 
