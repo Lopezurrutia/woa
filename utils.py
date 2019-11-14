@@ -69,16 +69,6 @@ def read_and_plot(
     make_plot(lons,lats,data[month,depthlevel,:,:],min_val = min_val,max_val=max_val,titulo = title,filename=filename)
     return
 
-read_and_plot(
-        variable='temperature',
-        resolution = '04',
-        woapath='woa_np/',
-        month=0,
-        depthlevel=0,
-        min_val=-5,
-        max_val=35,
-        title= 'Sea surface temperature',
-        filename='sst_jan.png')
 
 def extract_woa(
         lons, ## array or list with lons
@@ -149,6 +139,14 @@ def extract_woa(
     data_selection=data[months_index,depths_index,lats_index,lons_index]
     return data_selection
 
+extract_woa(
+        lons=[-10,-5], ## array or list with lons
+        lats=[42,44], ## array or list with lats
+        depths=None, ## if None, depth profile is extracted
+        months= None, ## if None, seasonal cycle is extracted
+        variable='temperature',
+        resolution = '04',
+        woapath='woa_np/')
 
 
 import pandas

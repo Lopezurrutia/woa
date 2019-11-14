@@ -28,7 +28,18 @@ read_and_plot(
         	filename='sst_jan.png')
 ```
 would make the plot presented above
-- extract_woa : extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
+```
+extract_woa(
+        lons=[-10,-5],
+        lats=[42,44], 
+        depths=[0,20],
+        months= [0,2],
+        variable='temperature',
+        resolution = '04',
+        woapath='woa_np/')
+```
+would return 'array([14.12209034, 12.3142004 ])'
+this function extracts data from the specificied variable and resolution given lon and lat coordinates, if a depth vector is not provided it will extract the complete profile at each location, if a month vector is not provided it will extract the complete seasonal cycle.
 
 
 ## Other files not used
