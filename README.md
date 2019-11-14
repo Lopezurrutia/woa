@@ -13,7 +13,7 @@ The compressed numpy files are saved to the output dir (default to woa_np), one 
 **WARNING**: The files at 0.25 degree resolution are quite large, aprox 1.5 Gb each for the temperature and salinity npz files.
 
 ## Utilities
-- 'utils.py' contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
+- `utils.py` contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
 	 for example:
 ```
 read_and_plot(
