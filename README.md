@@ -3,16 +3,17 @@ Reads WORLD OCEAN ATLAS 2018 (WOA18) variables and creates python numpy matrix w
 ![SST January](sst_jan.png)
 
 ## Getting Started
-See https://www.nodc.noaa.gov/OC5/woa18/ for information on the World Ocean Atlas variables, resolution, etc.
-Download all variables and resolutions, and convert to numpy arrays by running the bash script:
+See the [World Ocean Atlas](https://www.nodc.noaa.gov/OC5/woa18/) for information on the available variables, resolution, etc.
+To download all variables and resolutions, and convert to numpy arrays run the bash script:
 ```
 ./read_woa_all.sh
 ```
 Uncomment those varaibles not of your interest.  
 The compressed numpy files are saved to the output dir (default to woa_np), one file per variable.  
-WARNING: The files at 0.25 degree resolution are quite large, aprox 1.5 Gb each for the temperature and salinity npz files.
+**WARNING**: The files at 0.25 degree resolution are quite large, aprox 1.5 Gb each for the temperature and salinity npz files.
 
-- utils.py contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
+## Utilities
+- 'utils.py' contains utility functions to make global maps of specific variables and to extract data from vector of coordinate points
 	 for example:
 ```
 read_and_plot(
