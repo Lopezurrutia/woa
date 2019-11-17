@@ -71,7 +71,7 @@ would write file csv/csvdata_nodepth_temperature1.csv
 [NetCDF4](https://unidata.github.io/netcdf4-python/netCDF4/index.html) python library, there is also an (unmaintained) read_woa_csv.py file where you can get ideas on how to read the data from csv files, without the need of NetCDF
 
 ## Authors
-[Angel Lopez-Urrutia](https://lopezurrutia.github.com/)
+[Angel Lopez-Urrutia](https://lopezurrutia.github.com/)  
 This software is a contribution to project *Role of membrane DESaturases in the Global Ocean distribution of picoCYAnobacteria* (CYADES): RTI2018-100690-B-I00
 
 ## License
