@@ -15,6 +15,7 @@ arg = parser.add_argument
 arg('--variable', default="temperature")
 arg('--resolution', default='04')
 arg('--field', default='an')
+arg('--csv', default='csvdata.csv')
 arg('--woapath', default='woa_np/')
 args = parser.parse_args()
 
@@ -81,10 +82,12 @@ def extract_woa(
 
     lons=np.asarray(lons)
     lats=np.asarray(lats)
-    if depths is not None:
-        depths=np.asarray(depths)
+        
     if months is not None:
         months=np.asarray(months)
+        if((months>11.).any() or (months < 0.).any()):
+            print('Month should be 0 to 11')
+            return
     
     lons = np.mod(lons + 180.0, 360.0) - 180.0 ## convert 0-360 to -180 to 180
     if((lons>180.).any() or (lons < -180.).any()):
@@ -94,15 +97,6 @@ def extract_woa(
     if((lats>90.).any() or (lats < -90.).any()):
         print('Latitudes should be -90 to 90')
         return
-    if((months>11.).any() or (months < 0.).any()):
-        print('Month should be 0 to 11')
-        return
-    if((months>11.).any() or (months < 0.).any()):
-        print('Month should be 0 to 11')
-        return
-    if((depths<0.).any()):
-        print('Negative depths converted to positive should be 0 to 11')
-        depths=abs(depths) ## convert negative depths to positive
 
         
     ## Reads the WOA numpy matrix and depth, lat, lon vectors
@@ -113,10 +107,16 @@ def extract_woa(
     data = temp_mat['var']
     depths_woa=temp_mat['depths']
     depths_bnds=temp_mat['depths_bnds']
-    if((depths> max(depths_bnds[:,1])).any()):
-        print('Depths should be smaller than',max(depths_bnds[:,1]))
-        print('Deeper values are clipped to ',max(depths_bnds[:,1]))
-        depths[depths> max(depths_bnds[:,1])]= max(depths_bnds[:,1])
+    if depths is not None:
+        depths=np.asarray(depths)
+        if((depths<0.).any()):
+            print('Negative depths converted to positive should be 0 to 11')
+            depths=abs(depths) ## convert negative depths to positive
+
+        if((depths> max(depths_bnds[:,1])).any()):
+            print('Depths should be smaller than',max(depths_bnds[:,1]))
+            print('Deeper values are clipped to ',max(depths_bnds[:,1]))
+            depths[depths> max(depths_bnds[:,1])]= max(depths_bnds[:,1])
 
     lons_woa=temp_mat['lons']
     lons_bnds=temp_mat['lons_bnds']
@@ -138,55 +138,3 @@ def extract_woa(
         depths_index=np.digitize(depths,depths_bnds[:,1],right=True)
     data_selection=data[months_index,depths_index,lats_index,lons_index]
     return data_selection
-
-extract_woa(
-        lons=[-10,-5], ## array or list with lons
-        lats=[42,44], ## array or list with lats
-        depths=None, ## if None, depth profile is extracted
-        months= None, ## if None, seasonal cycle is extracted
-        variable='temperature',
-        resolution = '04',
-        woapath='woa_np/')
-
-
-import pandas
-input_csv='Flombaum.csv'
-variable='temperature'
-resolution = '04'
-woapath='woa_np/'
-
-
-df = pandas.read_csv(input_csv)
-
-Year=df['Year'].values.astype('int')
-Decimalday = df['Decimalday'].values
-
-## Convert Decimal day to month
-from datetime import datetime, timedelta
-if Year is None:
-    Year= [1999]*len(Decimalday)
-Dates= [np.nan if (np.isnan(i) or np.isnan(j)) else datetime(i-1, 12, 31)+timedelta(days=j) for i,j in zip(Year,Decimalday) ]
-Months = [i.month-1 if isinstance(i, datetime) else np.nan for i in Dates]
-
-Depths=df['Depth'].values
-Lon=df['Lon'].values
-Lat=df['Lat'].values
-
-tempreal=df['Temperature'].values
-
-full_mat=np.vstack((Lon,Lat,Depths,Months))
-complete_rows=np.isfinite(full_mat).all(axis=0)
-res_full = np.full([full_mat.shape[1]], np.nan)
-full_mat=full_mat[:,complete_rows]
-res_full[complete_rows]=extract_woa(lons=full_mat[0,:],lats=full_mat[1,:],depths=full_mat[2,:],
-                                    months= full_mat[3,:], ## if None, seasonal cycle is extracted
-                                    variable=variable,
-                                    resolution = resolution,
-                                    woapath=woapath)
-
-df[f'{variable}{resolution}']=res_full
-
-
-
-
-
