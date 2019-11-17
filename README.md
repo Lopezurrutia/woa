@@ -72,7 +72,7 @@ would write file csv/csvdata_nodepth_temperature1.csv
 
 ## Authors
 [Angel Lopez-Urrutia](https://lopezurrutia.github.com/)
- This software is a contribution to project *Role of membrane DESaturases in the Global Ocean distribution of picoCYAnobacteria* (CYADES): RTI2018-100690-B-I00
+This software is a contribution to project *Role of membrane DESaturases in the Global Ocean distribution of picoCYAnobacteria* (CYADES): RTI2018-100690-B-I00
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
