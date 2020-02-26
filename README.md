@@ -45,19 +45,19 @@ this function extracts data from the specificied variable and resolution given l
 
 - `extract_csv.py` is a python script to read coordinates and Month/Depth from a csv file, call extract_woa to extract the given variable at given resolution and save the extracted data into a csv file with the same filename (with suffix of the variable and resolution). For example:
 ```
-python --variable "temperature" --resolution "1" --csv "csvs/csvdata.csv"
+python extract_csv.py --variable "temperature" --resolution "1" --csv "csvs/csvdata.csv"
 ```
 would write a csv file in csv/csvdata_temperature1.csv with the temperatures at 1 degree resolution for those coordinates, *note* that many locations close to coast would give no data.
 
 When the csv does not have a column with "Month" the script would extract the data for the 12 months
 ```
-python --variable "temperature" --resolution "1" --csv "csvs/csvdata_nomonth.csv"
+python extract_csv.py --variable "temperature" --resolution "1" --csv "csvs/csvdata_nomonth.csv"
 ```
 would write file csv/csvdata_nomonth_temperature1.csv 
 
 When the csv does not have a column with "Depth" the script would extract the data for all the depth levels
 ```
-python --variable "temperature" --resolution "1" --csv "csvs/csvdata_nodepth.csv"
+python extract_csv.py --variable "temperature" --resolution "1" --csv "csvs/csvdata_nodepth.csv"
 ```
 would write file csv/csvdata_nodepth_temperature1.csv 
 
